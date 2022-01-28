@@ -1,0 +1,13 @@
+.wraper{
+    width: 45%;
+    margin: 0 auto;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    border: 1px yellow;
+}
+.wraper h1{
+    text-decoration: underline;
+}
+.wraper input{
+    width:60%;
+}
