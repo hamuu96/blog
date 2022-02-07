@@ -8,11 +8,14 @@ const app = express();
 
 app.listen(8081);
 
-// Static Middleware
-app.use(express.static('static'))
+// // Static Middleware
+// app.use(express.static('static'))
 // app.use('/img',express.static(path.join(__dirname, 'static/img')));
-// app.use('/css',express.static(path.join(__dirname, 'static/css')));
-  
+// app.use('/style',express.static(path.join(__dirname, 'static/style')));
+//   // Static Files
+app.use(express.static('static'));
+app.use('/style', express.static(__dirname + 'static/style'))
+app.use('/img', express.static(__dirname + 'static/img'))
 // View Engine Setup
 app.set('views', path.join(__dirname, 'views'));
 
