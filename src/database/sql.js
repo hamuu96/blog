@@ -27,5 +27,6 @@ module.exports = {
         user_id int(7),
         foreign key (user_id) references users(user_id)
 
-    )`
+    )`,
+    insert_admin: ` insert into admin where username = ? , firstname = ? , lastname = ?, email = ? , password = ?`
 }

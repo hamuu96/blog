@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "simple blog web application",
   "main": "index.js",
+  
   "scripts": {
     "start": "npx nodemon index.js"
   },
