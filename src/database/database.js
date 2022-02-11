@@ -1,33 +1,21 @@
 const mysql = require('mysql');
 const database = 'M00794993Hamza';
 
-// const config = {
-//     host: 'localhost',
-//     user: 'M00794993Hamza',
-//     password: '1234' ,
-//     database: database
-// }
 const config = {
     host: 'localhost',
-    user: 'root',
-    password: '' ,
+    user: 'M00794993Hamza',
+    password: '1234' ,
     database: database
 }
 async function test_conn(database = null) {
 
-    // const initial_conn = mysql.createConnection({
-    //     host: 'localhost',
-    //     user: 'M00794993Hamza',
-    //     password: '1234' 
-       
-    // });
-
     const initial_conn = mysql.createConnection({
         host: 'localhost',
-        user: 'root',
-        password: '' 
+        user: 'M00794993Hamza',
+        password: '1234' 
        
     });
+
     //connect to database
     initial_conn.connect((err) => {
         if (err)
@@ -47,21 +35,14 @@ const test = test_conn(database);
 
 
 if (test ){ // error when using config as the configuration
-    // const connection = mysql.createConnection(
-    //     {
-    //         host: 'localhost',
-    //         user: 'M00794993Hamza',
-    //         password: '1234' ,
-    //         database: database
-    //     }
-
     const connection = mysql.createConnection(
         {
             host: 'localhost',
-            user: 'root',
-            password: '' ,
+            user: 'M00794993Hamza',
+            password: '1234' ,
             database: database
         }
+
     )
     connection.connect((err) => {
         if (err)
