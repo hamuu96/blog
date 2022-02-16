@@ -307,3 +307,22 @@ footer{
 	position: relative;
 	
 }
+
+
+
+/* customer css */
+
+#admin-container{
+	margin-top:60px;
+	margin-bottom: 60px;
+}
+
+.my-custom-scrollbar {
+	position: relative;
+	height: 200px;
+	overflow: auto;
+	width:150%;
+	}
+	.table-wrapper-scroll-y {
+	display: block;
+	}
