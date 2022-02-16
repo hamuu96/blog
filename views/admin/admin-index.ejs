@@ -2,11 +2,45 @@
 <html lang="en">
     <%- include('../partials/head.ejs') %>  
 <body>
-    <%- include('../partials/nav.ejs') %>   
+    <%- include('../partials/admin-nav.ejs') %>   
 
-    <div class="container">
-      <h1>admin index page</h1>
+    <div class="container" id="admin-container">
+      <h1>Welcome Back: Admin</h1>
+          <div class="table-wrapper-scroll-y my-custom-scrollbar" width="100%">
+
+        <table class="table table-bordered table-striped mb-0">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Request</th>
+            </tr>
+          </thead>
+        
+          <tbody>
+          <% try { %>
+            <% const lines = logs.split('\r\n') ; var counter = 1;  %>
+            <% for (var i = 0; i < lines.length; i++) {%>
+           
+            <tr>
+              <th scope="row"><%= counter %></th>
+              <td><%= lines[i] %></td>
+            </tr>
+            <%  } %>            
+
+            
+         <% } catch(err) { %> 
+            <p>Logs not available</p>
+
+            <% counter ++ }%>
+
+         
+
+          </tbody>
+        </table>
+
     </div>
+  </div>
+
   
 
 
