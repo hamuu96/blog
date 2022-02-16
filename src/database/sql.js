@@ -28,6 +28,10 @@ module.exports = {
         foreign key (user_id) references users(user_id)
 
     )`,
-    insert_admin: ` insert into admin where username = ? , firstname = ? , lastname = ?, email = ? , password = ?`
+    insert_admin: ` insert into admin where username = ? , firstname = ? , lastname = ?, email = ? , password = ?`,
     // INSERT INTO `admin`(`admin_id`, `username`, `firstname`, `lastname`, `email`, `password`) VALUES ('admin', 'hamza', 'abdikadir', 'hamanto96@gmail.com', '1234')
+    
+
+    selectAdmin:  `select * from admin where email = ? and password = ? `,
+
 }
