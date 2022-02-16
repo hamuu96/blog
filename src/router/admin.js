@@ -1,21 +1,22 @@
 const express = require('express');
 const router = express.Router();
-// const bodyParser = require('body-parser');
+var bodyParser = require('body-parser')
 const app = express();
 const authController = require('../controllers/adminController');
+var cookie = require("cookie-parser");
+
+app.use(cookie());
+
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
+
+// root path to admin page
+router.get('/', authController.admin_root);
 
 
-
-router.get('/', (req, res ) => {
-    res.render('admin/admin-index');
-    console.log(req.url);
-});
-
-
-
+//route and controller to login page of admin
 router.get('/login',authController.admin_login );
-
-router.get('/login/auth',authController.login );
+// auth section of admin page
+router.get('/login/auth',urlencodedParser,authController.login );
 
 
 
