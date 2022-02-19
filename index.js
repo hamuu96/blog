@@ -9,7 +9,11 @@ const basic = require('./src/router/basic');
 
 const app = express();
 
-app.listen(process.env.PORT, () => {console.log(`server has started on port ${process.env.PORT}`);});
+
+// setting up port on app 
+let port = process.env.PORT || 8082
+app.listen(port, () => {console.log(`server has started on port ${process.env.PORT}`);});
+
 // serving of static files middleware
 app.use(express.static('static'));
 app.use('/style', express.static(__dirname + 'static/style'))
@@ -21,7 +25,7 @@ app.set('view engine', 'ejs');
 
 // convert data into json format
 app.use(express.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 //write logs to a file
 var logs = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
