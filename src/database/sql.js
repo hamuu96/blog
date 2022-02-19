@@ -5,7 +5,7 @@ module.exports = {
         lastname varchar(20), 
         email varchar(50), 
         password varchar (100), 
-        special_member bool, 
+        author char(8),
         dob date, 
         address varchar(40)
 
@@ -29,9 +29,9 @@ module.exports = {
 
     )`,
     insert_admin: ` insert into admin where username = ? , firstname = ? , lastname = ?, email = ? , password = ?`,
-    // INSERT INTO `admin`(`admin_id`, `username`, `firstname`, `lastname`, `email`, `password`) VALUES ('admin', 'hamza', 'abdikadir', 'hamanto96@gmail.com', '1234')
     
-
+    selectalladmin: `select * from admin where email = ?`,
     selectAdmin:  `select * from admin where email = ? and password = ? `,
+    insertUser: 'insert into users (`firstname`, `lastname`, `email`, `password`, `address`, `author`, `dob`) values (?,?,?,?,?,?,?) '
 
 }
