@@ -8,7 +8,7 @@
       <h1>Welcome Back: Admin</h1>
           <div class="table-wrapper-scroll-y my-custom-scrollbar" width="100%">
 
-        <table class="table table-bordered table-striped mb-0">
+        <table class="table table-bordered table-striped mb-0" >
           <thead>
             <tr>
               <th scope="col">#</th>
@@ -18,11 +18,11 @@
         
           <tbody>
           <% try { %>
-            <% const lines = logs.split('\r\n') ; var counter = 1;  %>
+            <% const lines = logs.split('::') ; var counter = 1;  %>
             <% for (var i = 0; i < lines.length; i++) {%>
            
             <tr>
-              <th scope="row"><%= counter %></th>
+              <th scope="row"><%= i+1 %></th>
               <td><%= lines[i] %></td>
             </tr>
             <%  } %>            
