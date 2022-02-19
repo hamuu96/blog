@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<%- include('../partials/head.ejs') %> 
+  <body>
+    
+	<%- include('../partials/nav.ejs') %>   
+
+
+<div class="container" style="margin:300px  auto ;">
+    <form action="/signup" method="post">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="inputEmail4">Firstname</label>
+                <input type="text" class="form-control" id="inputEmail4" placeholder="Fristname" name="firstname" required>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="inputPassword4">Lastname</label>
+                <input type="text" class="form-control" id="inputPassword4" placeholder="Lastname" name="lastname" required>
+              </div> 
+          <div class="form-group col-md-6">
+            <label for="inputEmail4">Email</label>
+            <input type="email" class="form-control" id="inputEmail4" placeholder="Email" name="email" required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputPassword4">Password</label>
+            <input type="password" class="form-control" id="inputPassword4" placeholder="Password" name="password" required>
+            <small id="passwordHelpInline" class="text-muted">
+              Must be 8-20 characters long.
+            </small>
+          </div>
+        </div>
+        <!-- <div class="form-group">
+          <label for="inputAddress">Address</label>
+          <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+        </div>
+        <div class="form-group">
+          <label for="inputAddress2">Address 2</label>
+          <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+        </div> -->
+        <div class="form-row">
+          <div class="form-group col-md-5">
+            <label for="inputCity">Address</label>
+            <input type="text" class="form-control" id="inputCity" name="address" required>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="inputState">Author</label>
+            <select id="inputState" class="form-control" name="author" required >
+              <option>True</option>
+              <option Selected>False</option>
+            </select>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="inputZip">Date of birth</label>
+            <input type="Date" class="form-control" id="inputZip" name="dob" required>
+            <small id="passwordHelpInline" class="text-muted">
+              Must be 8-20 characters long.
+            </small>
+          </div>
+        </div>
+        <div class="form-group">
+           <p href="#"> Dont have an account? <a href="/login">Login </a></p> 
+        </div>
+        <button type="submit" class="btn btn-primary" name="signup" >Sign in </button>
+      </form>
+    
+</div>
+
+  <%- include('../partials/footer.ejs') %>   
+
+  </body>
+</html>
