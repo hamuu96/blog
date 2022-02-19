@@ -16,8 +16,7 @@ router.get('/', authController.admin_root);
 //route and controller to login page of admin
 router.get('/login',authController.admin_login );
 // auth section of admin page
-router.get('/login/auth',urlencodedParser,authController.login );
-
+router.post('/login',urlencodedParser,authController.login_auth );
 
 
 
