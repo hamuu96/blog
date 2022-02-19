@@ -1,21 +1,20 @@
-
 # user
- - signup 
- - login 
- - contact admin -> request to be author
- - 
-# author
- - create a blog
-    - choose title
-    - content
-    - provide multimedia if needed   
-    - choose blog visibility 
-        - private
-        - public 
-        - members
- - update blog
- - delete blog
-# admin
- - login 
- - approve request from users 
- - view logs, access
+    - visit page view public blogs
+    - signup 
+    - login 
+    - choose to be a normal user or author 
+# member
+    - login 
+    - create blogs
+        - blogs can be private, public , member
+        - edit blog
+        - add multimedia 
+    - delete blogs
+
+# admin 
+    - view logs
+
+
+
+* questions *
+ - how to insert admin once 
