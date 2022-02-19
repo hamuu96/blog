@@ -321,7 +321,6 @@ footer{
 	position: relative;
 	height: 200px;
 	overflow: auto;
-	width:150%;
 	}
 	.table-wrapper-scroll-y {
 	display: block;
