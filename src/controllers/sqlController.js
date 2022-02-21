@@ -3,9 +3,6 @@ const db = require('../database/database');
 
 const conn = db.conn;
 
-
-
-
 function getAdminCreds(email,callback) {
     conn.query(sql.selectalladmin, [email], (err, result, fields) => {
        return callback(result);
@@ -13,6 +10,12 @@ function getAdminCreds(email,callback) {
 
     
  }
+
+function getUser(email, callback){
+    conn.query(sql.selectUser, [email], (err, result, fields) =>{
+        return callback(result, err);
+    })
+}
 
 function insertUsers(firstname, lastname, email, password, address,  author, dob, callback){
 
@@ -27,5 +30,6 @@ function insertUsers(firstname, lastname, email, password, address,  author, dob
 
  module.exports = {
      getAdminCreds,
-     insertUsers,
+    insertUsers,
+    getUser,
  }
