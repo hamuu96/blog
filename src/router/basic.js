@@ -11,6 +11,10 @@ router.get('/', (req, res) =>{
     res.render('user/index');
     console.log(req.url);
 });
+//request to logged in users 
+router.get('/main', (req, res) =>{
+    res.render('user/main');
+});
 //post request signup 
 router.get('/single', (req, res) =>{
     res.render('user/single');
