@@ -32,6 +32,7 @@ module.exports = {
     
     selectalladmin: `select * from admin where email = ?`,
     selectAdmin:  `select * from admin where email = ? and password = ? `,
-    insertUser: 'insert into users (`firstname`, `lastname`, `email`, `password`, `address`, `author`, `dob`) values (?,?,?,?,?,?,?) '
-
+    
+    insertUser: 'insert into users (`firstname`, `lastname`, `email`, `password`, `address`, `author`, `dob`) values (?,?,?,?,?,?,?) ',
+    selectUser: 'Select * from users where email = ?'
 }
