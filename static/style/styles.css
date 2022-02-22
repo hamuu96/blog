@@ -325,3 +325,24 @@ footer{
 	.table-wrapper-scroll-y {
 	display: block;
 	}
+
+.author-options{
+	margin-top: 30px;
+}
+.author-options a{
+	color: white;
+	text-decoration: none;
+}
+
+/* blog create section */
+.create-form{
+	border-radius: 52px;
+	padding:35px 40px ;
+	margin-top: 90px;
+	border: 1px black; 
+	border-style:solid;
+	width: 90%;
+}
+.create-form h2{
+	padding-bottom:10px
+}
