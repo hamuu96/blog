@@ -21,21 +21,32 @@ router.get('/single', (req, res) =>{
 });
 //post request signup 
 router.get('/login', (req, res) =>{
-    // res.render('login');
-   res.json({msg: 'sucess'}) ;
+    res.render('user/login');
+//    res.json({msg: 'sucess'}) ;
 });
 
+//post request signup 
+router.post('/login', userController.login)
 
 //post request signup 
 router.get('/signup', (req, res) =>{
 //    res.json({msg: 'signup'}) ;
     res.render('user/signup');
 });
+
 //post request signup 
 router.post('/signup', userController.signup)
 
 router.get('/post', (req, res) =>{
     res.render('user/post');
 });
+
+// author section 
+// get author page 
+
+
+
+
+
 
 module.exports = router; 

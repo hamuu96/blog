@@ -27,7 +27,7 @@ exports.signup = (req, res, next) => {
             res.json({err: 'user already exists'})
         }else{
              //check if password is longer than 8 characters
-            if(password.length <= 8){
+            if(password.length <= 3){
                 res.json({err: 'please enter a longer password'})
             }
             else{
@@ -38,7 +38,7 @@ exports.signup = (req, res, next) => {
                         sqlController.insertUsers(firstname, lastname, email, hash, address, author, mySQLDateString, (result, err) =>{
                             if(err) throw err;
                             res.status(200);
-                            res.redirect('/main');
+                            res.redirect('/login')
                             // res.json({msg: 'success'});
                         });
                     });
@@ -47,8 +47,46 @@ exports.signup = (req, res, next) => {
         }
        
     }) 
-      
-
-   
-   
 }
+
+exports.login =  async (req, res,next) => {
+
+    const {email , password } = req.body
+    //check if fields are not empty
+    if(email == '' && password == ''){
+        res.json({err:'please fill form'})
+    }
+    else{
+        sqlController.getUser(req.body.email, (result) =>{
+            if(result.length == 1){
+                
+            try{
+                //check password provided with one in database
+                const hashcompare = bcrypt.compareSync(password, result[0]['password'])
+                    if(hashcompare){
+                        if(result[0]['author'] == 'True'){
+                            res.status(200);
+                           res.redirect(301, '/author') //redirect to 
+                            
+                           next()
+                        }else{
+                            res.redirect('/main') // redirect to logged in user
+                        }
+                    }
+                    else{
+                        res.json({err: 'not success'})
+
+                    }
+            } catch{
+                    res.status(500).send()
+            }
+            }
+        })
+    }
+
+  
+}
+
+exports.author = (req, res) =>{
+    res.render('author/author-index');
+};
