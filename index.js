@@ -6,9 +6,9 @@ const morgan = require('morgan')
 var bodyParser = require('body-parser');
 const admin = require('./src/router/admin');
 const basic = require('./src/router/basic');
+const author = require('./src/router/author');
 
 const app = express();
-
 
 // setting up port on app 
 let port = process.env.PORT || 8082
@@ -31,9 +31,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 var logs = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
 
 // morgan middleware provides log 
-app.use(morgan('common', { stream: logs})) // --> write logs to a file 
+app.use(morgan('common', {stream: logs})) // --> write logs to a file 
+
 
 // Routes 
 app.use('/', basic);
 app.use('/admin',admin );
+app.use('/author', author );
 
