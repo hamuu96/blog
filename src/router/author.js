@@ -10,5 +10,13 @@ router.get('/', authorConroller.author);
 router.get('/profile', authorConroller.profile); 
 
 
+// get author page 
+router.get('/public', authorConroller.public); 
+// get author page 
+router.get('/member', authorConroller.member); 
+// get author page 
+router.get('/private', authorConroller.private); 
+// get author page 
+router.get('/view', authorConroller.view); 
 
 module.exports = router;
