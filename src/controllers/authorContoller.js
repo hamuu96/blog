@@ -6,8 +6,17 @@ const bcrypt = require('bcrypt')
 const readline = require('readline')
 const escape = require('escape-html');
 const { builtinModules } = require('module')
+const sql = require('../database/sql')
 
+function insertBlogContent (req, res){
+    const { heading, content, image,  file,  view_option, userid} = req.body
+    // console.log(req.body);
+    sqlController.insertBlog( heading, content, image,  file,  view_option, userid, (result, err) => {
+        if(err) throw err;
+        res.redirect('/author') 
+    })
 
+}
 exports.author = (req, res) => {
     res.render('author/author-index');
 }
@@ -18,21 +27,21 @@ exports.profile = (req, res) => {
 
 
 exports.public = (req, res) => {
-    // res.json({msg: 'create public blog'})
-    res.render('author/create-public');
-}
 
+    res.render('author/create', {option: 'public'});
+}
 exports.private = (req, res) => {
-    res.json({msg: 'create private blog'})
-    // res.render('author/author-profile');
+    res.render('author/create', {option: 'priavte'});
 }
 
 exports.member = (req, res) => {
-    res.json({msg: 'create member blog'})
-    // res.render('author/author-profile');
+    res.render('author/create', {option: 'member'});
 }
 
 exports.view= (req, res) => {
-    res.json({msg: 'view blog'})
-    // res.render('author/author-profile');
+    res.render('author/author-profile');
+}
+
+exports.postBlog = (req, res) => {
+    insertBlogContent(req, res)
 }

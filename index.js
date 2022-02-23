@@ -25,7 +25,7 @@ app.set('view engine', 'ejs');
 
 // convert data into json format
 app.use(express.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //write logs to a file
 var logs = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })

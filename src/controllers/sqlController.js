@@ -21,9 +21,19 @@ function insertUsers(firstname, lastname, email, password, address,  author, dob
 
     // //convert string to bool
     // const auth = String(author); 
-    /// how to insert bool value instead of stead of string ????
+    /// how to insert bool value instead of stead of string ???? in authors table
 
     conn.query(sql.insertUser, [firstname, lastname, email, password, address, author, dob], (err, result, fields) => {
+        return callback(result, err);
+    })
+}
+
+
+function insertBlog(heading, content, image,  file,  view_option, userid, callback){
+
+    //insert blog 
+    conn.query(sql.insertBlog, [heading, content, image,  file,  view_option, userid], (err, result, fields) => {
+        //return results
         return callback(result, err);
     })
 }
@@ -32,4 +42,5 @@ function insertUsers(firstname, lastname, email, password, address,  author, dob
      getAdminCreds,
     insertUsers,
     getUser,
+    insertBlog,
  }

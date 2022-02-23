@@ -328,6 +328,10 @@ footer{
 
 .author-options{
 	margin-top: 30px;
+	margin-bottom: 70px;
+}
+.author-options button{
+	margin-top: 20px;
 }
 .author-options a{
 	color: white;
@@ -345,4 +349,7 @@ footer{
 }
 .create-form h2{
 	padding-bottom:10px
+}
+.media{
+	display: block;
 }
