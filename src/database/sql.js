@@ -38,9 +38,10 @@ module.exports = {
     //insert statements
     insert_admin: ` insert into admin where username = ? , firstname = ? , lastname = ?, email = ? , password = ?`,
     insertUser: 'insert into users (`firstname`, `lastname`, `email`, `password`, `address`, `author`, `dob`) values (?,?,?,?,?,?,?) ',
-    insertBlog: 'Insert into blog (heading, content, media_path,view_option, user_id) values (?,?,?,?,?)',
+    insertBlog: 'Insert into blog (heading, content, image, media_path,view_option, user_id) values (?,?,?,?,?,?)',
     //select statements
     selectalladmin: `select * from admin where email = ?`,
     selectAdmin:  `select * from admin where email = ? and password = ? `,
-    selectUser: 'Select * from users where email = ?'
+    selectUser: 'Select * from users where email = ?',
+    selectBlog: 'Select * from blog where view_option = ?'
 }
