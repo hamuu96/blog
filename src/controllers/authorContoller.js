@@ -4,14 +4,18 @@ const sqlController = require('./sqlController')
 const cookie = require('cookie-parser')
 const bcrypt = require('bcrypt')
 const readline = require('readline')
+const multer = require('multer')
 const escape = require('escape-html');
 const { builtinModules } = require('module')
 const sql = require('../database/sql')
 
-function insertBlogContent (req, res){
-    const { heading, content, image,  file,  view_option, userid} = req.body
-    // console.log(req.body);
-    sqlController.insertBlog( heading, content, image,  file,  view_option, userid, (result, err) => {
+// get data from form and insert into database
+function insertBlogContent (req, res, upload){
+    const { heading, content, image, multimedia,view_option, userid} = req.body
+    //print form data
+
+    // // insert data into database about blog
+    sqlController.insertBlog( heading, content, image, multimedia,view_option, userid, (result, err) => {
         if(err) throw err;
         res.redirect('/author') 
     })
@@ -42,6 +46,11 @@ exports.view= (req, res) => {
     res.render('author/author-profile');
 }
 
-exports.postBlog = (req, res) => {
+exports.postBlog =  (req, res) => {
+    //execution of function
     insertBlogContent(req, res)
 }
+// exports.postBlog = (req, res,upload) => {
+//     //execution of function
+//     insertBlogContent(req, res, upload)
+// }
