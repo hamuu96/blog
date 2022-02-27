@@ -29,18 +29,29 @@ function insertUsers(firstname, lastname, email, password, address,  author, dob
 }
 
 
-function insertBlog(heading, content, image,  file,  view_option, userid, callback){
+function insertBlog(heading, content, image, multimedia,view_option, userid, callback){
 
     //insert blog 
-    conn.query(sql.insertBlog, [heading, content, image,  file,  view_option, userid], (err, result, fields) => {
+    conn.query(sql.insertBlog, [heading, content, image, multimedia,view_option, userid], (err, result, fields) => {
         //return results
         return callback(result, err);
     })
+
 }
 
+function getPublicBlog(view_options, callback){
+
+    //insert blog 
+    conn.query(sql.selectBlog, [view_options] ,(err, result, fields) => {
+        //return results
+        return callback(result, err);
+        
+    })
+}
  module.exports = {
      getAdminCreds,
     insertUsers,
     getUser,
     insertBlog,
+    getPublicBlog, 
  }
