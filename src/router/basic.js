@@ -1,16 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController')
+const publicController = require('../controllers/publicController')
+
 
 //post request signup 
-router.get('/', (req, res) =>{
-
-    //initialize database and create tables
-    const create_tables = require('../database/tables');
-    
-    res.render('user/index');
-    console.log(req.url);
-});
+router.get('/', publicController.getBlogs);
 //request to logged in users 
 router.get('/main', (req, res) =>{
     res.render('user/main');
