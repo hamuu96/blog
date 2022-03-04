@@ -2,46 +2,21 @@ const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController')
 const publicController = require('../controllers/publicController')
-
+const memberController = require('../controllers/membersController')
 
 //post request signup 
 router.get('/', publicController.getBlogs);
 //request to logged in users 
-router.get('/main', (req, res) =>{
-    res.render('user/main');
-});
+router.get('/main', memberController.getMemberBlogs);
 //post request signup 
-router.get('/single', (req, res) =>{
-    res.render('user/single');
-});
+router.get('/single/:id',publicController.displaySingleBlog );
 //post request signup 
-router.get('/login', (req, res) =>{
-    res.render('user/login');
-//    res.json({msg: 'sucess'}) ;
-});
-
+router.get('/login', publicController.getlogin);
 //post request signup 
-router.post('/login', userController.login)
-
+router.post('/login', userController.login);
 //post request signup 
-router.get('/signup', (req, res) =>{
-//    res.json({msg: 'signup'}) ;
-    res.render('user/signup');
-});
-
+router.get('/signup', publicController.getsignup); 
 //post request signup 
 router.post('/signup', userController.signup)
-
-router.get('/post', (req, res) =>{
-    res.render('user/post');
-});
-
-// author section 
-// get author page 
-
-
-
-
-
 
 module.exports = router; 

@@ -8,12 +8,6 @@ router.get('/', authorConroller.author);
 
 // get author page 
 router.get('/profile', authorConroller.profile); 
-
-// is there a way to chain routes while using controller
-// router.route('/public')
-//     .get(authorConroller.public),
-//     .post(authorConroller.blog);
-
 // get author page 
 router.get('/public', authorConroller.public); 
 // get author page 
@@ -21,8 +15,18 @@ router.post('/public', authorConroller.postBlog);
 // get author page 
 router.get('/member', authorConroller.member); 
 // get author page 
+router.post('/member', authorConroller.postBlog); 
+// get author page 
 router.get('/private', authorConroller.private); 
 // get author page 
+router.post('/private', authorConroller.postBlog); 
+// get author page 
 router.get('/view', authorConroller.view); 
+// get author page 
+router.get('/view/delete/:id', authorConroller.deleteBlog); 
+// get author page 
+router.get('/edit/:id', authorConroller.edit); 
+// get author page 
+router.post('/edit/:id', authorConroller.editBlog); 
 
 module.exports = router;
