@@ -22,10 +22,10 @@ module.exports = {
     
     blog: `create table if not exists blog(
         blog_id int (4) auto_increment primary key, 
-        heading varchar(40) not null, 
+        heading varchar(100) not null, 
         content text not null,
         image varchar(100) not null,
-        media_path varchar(100) not null,
+        media_path varchar(100) ,
         view_option varchar(10) not null,
         date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
         user_id int(7) not null,
@@ -43,5 +43,14 @@ module.exports = {
     selectalladmin: `select * from admin where email = ?`,
     selectAdmin:  `select * from admin where email = ? and password = ? `,
     selectUser: 'Select * from users where email = ?',
-    selectBlog: 'Select * from blog where view_option = ?'
+    getAllBlogs: 'Select * from blog',
+    selectBlog: 'Select * from blog where view_option = ?',
+    selectSingleBlog: 'Select * from blog where blog_id = ?',
+
+
+    //delete
+    deleteBlogPost: 'delete from blog where blog_id = ?',
+
+    //update
+    updateBlogPost: 'update from blog where blog_id = ? , heading = ? , content = ?, view_option = ?,  user_id = ?'
 }
