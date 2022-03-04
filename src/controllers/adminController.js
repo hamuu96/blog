@@ -8,7 +8,6 @@ const readline = require('readline')
 //is it ok to use a middleware in a controller file
 const app = express();
 
-
 app.use(express());
 
 exports.admin_root = (req, res ) => {

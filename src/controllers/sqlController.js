@@ -48,10 +48,58 @@ function getPublicBlog(view_options, callback){
         
     })
 }
- module.exports = {
-     getAdminCreds,
+function getSingleBlog(blogId, callback){
+
+    //insert blog 
+    conn.query(sql.selectSingleBlog, [blogId] ,(err, result, fields) => {
+        //return results
+        return callback(result, err);
+        
+    })
+}
+function getMemberBlog(view_options, callback){
+
+    //insert blog 
+    conn.query(sql.selectBlog, [view_options] ,(err, result, fields) => {
+        //return results
+        return callback(result, err);
+        
+    })
+}
+function getAllBlogs(userid, callback){
+    conn.query(sql.getAllBlogs, [userid], (err, result, fields) =>{
+        return callback(result, err);
+    })
+}
+function deleteBlog(blog_id, callback){
+    conn.query(sql.deleteBlogPost, [blog_id], (err, result, fields) =>{
+        return callback(result, err);
+    })
+}
+function editBlog(blog_id, heading, content, image, multimedia,view_option, userid, callback){
+
+    //insert blog 
+    conn.query(sql.updateBlogPost, [blog_id, heading, content,view_option, userid], (err, result, fields) => {
+        //return results
+        return callback(result, err);
+    })
+
+}
+// function gBlog(blog_id, callback){
+//     conn.query(sql.deleteBlogPost, [blog_id], (err, result, fields) =>{
+//         return callback(result, err);
+//     })
+// }
+module.exports = {
+    getAdminCreds,
     insertUsers,
     getUser,
     insertBlog,
     getPublicBlog, 
+    getSingleBlog,
+    getMemberBlog,
+    getAllBlogs,
+    deleteBlog,
+    editBlog
+ 
  }
