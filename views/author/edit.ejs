@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('../partials/head.ejs') %>  
+
+<body>
+    
+    <%- include('../partials/author.ejs') %>  
+
+    <div class="container" style="margin-top: 70px; margin-bottom: 130px;">
+        <h1 style="text-align: center;">Welcome back: <author> hude</author></h1>
+
+        <div class="create-form">
+            <h2>Edit  blog</h2>
+            <form action="/author/edit/<%- option[0]['blog_id'] %>" method="post">
+                <div class="form-group">
+                    <label for="exampleFormControlInput1" >user id</label>
+                    <input type="text" class="form-control" style="text-transform: uppercase;" id="exampleFormControlInput1" placeholder=" user id " value=" <%- option[0]['user_id'] %>" name="userid">
+                  </div>
+                <div class="form-group">
+                    <label for="exampleFormControlInput1" >Blog Heading</label>
+                    <input type="text" class="form-control" style="text-transform: uppercase;" id="exampleFormControlInput1"  value=" <%- option[0]['heading'] %>" placeholder="Blog heading" name="heading">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Content</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1"   rows="5" name="content">  <%- option[0]['content'] %></textarea>
+                  </div>
+                
+                  <div class="form-group">
+                    <label for="exampleFormControlSelect1">Example select</label>
+                    <select class="form-control" id="exampleFormControlSelect1" name="view_option">
+                      <option select style="text-transform: capitalize;" ><%- option[0]['view_option'] %></option>
+                      <option select style="text-transform: capitalize;">Public</option>
+                      <option select style="text-transform: capitalize;">Private</option>
+                      <option select style="text-transform: capitalize;">Member</option>
+                    </select>
+                  </div>
+                    <button type="submit" class="btn btn-dark" name="updateBlog">Update</button>
+               </form>
+       
+             </div>
+    
+    
+        </div>
+
+       
+    </div>
+
+
+
+    <%- include('../partials/footer.ejs') %>  
+</body>
+</html>

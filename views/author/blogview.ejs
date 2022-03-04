@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('../partials/head.ejs') %>  
+
+<body>
+    
+    <%- include('../partials/author.ejs') %>  
+
+    <div class="container " id="blog-view">
+        <h1>Author's blogs</h1>
+        <% try { %>
+            <% var contentLength = Math.round(blogs[0]['content'].length /4); var shortContent = blogs[0]['content'].slice(0,77)  %>
+            <%   for(var i = 0; i< blogs.length; i++) {%>
+            
+                <div class="card">
+                    <h5 class="card-header"><%= blogs[i]['view_option'] %></h5>
+                    <div class="card-body">
+                    <h5 class="card-title"><%= blogs[i]['heading'] %></h5>
+                    <p class="card-text"> <%= blogs[i]['content'].slice(0,70) %></p>
+                    <a href="/author/edit/<%= blogs[i]['blog_id'] %>" class="btn btn-primary">Edit Post</a>
+                    <a  href="/author/view/delete/<%= blogs[i]['blog_id'] %>" class="btn btn-danger" >Delete</a>
+                    <!-- /view/delete/<%= blogs[i]['blog_id'] %> -->
+                    </div>
+                </div>
+            <% }; %>
+            <% } catch{ %>
+                <div class="alert alert-danger"   style="margin:150px 20px;" role="alert">
+                   No blogs available for this user. 
+                  </div>
+            
+            <% } %>
+       
+    </div>
+
+
+    <%- include('../partials/footer.ejs') %>  
+
+</body>
+</html>
