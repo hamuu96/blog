@@ -33,8 +33,7 @@ module.exports = {
 
     )`,
 
-    // INSERT INTO `users`(`user_id`, `firstname`, `lastname`, `email`, `password`, `author`, `dob`, `address`) VALUES (1,'hamza','abdiadkr','admin@emial.com','12121212','False','2022-02-23 06:05:01','1212121')
-
+    // INSERT INTO `admin`(`admin_id`, `username`, `firstname`, `lastname`, `email`, `password`) VALUES (1,'admin','hamza','abdikadir','hamza@email.com','$2a$10$XWC53zpM5y1en5cZmZK4peLILH5zb3kiLAidP1pgTLKUCCYHlOOTW')
     //insert statements
     insert_admin: ` insert into admin where username = ? , firstname = ? , lastname = ?, email = ? , password = ?`,
     insertUser: 'insert into users (`firstname`, `lastname`, `email`, `password`, `address`, `author`, `dob`) values (?,?,?,?,?,?,?) ',
@@ -52,5 +51,5 @@ module.exports = {
     deleteBlogPost: 'delete from blog where blog_id = ?',
 
     //update
-    updateBlogPost: 'update from blog where blog_id = ? , heading = ? , content = ?, view_option = ?,  user_id = ?'
+    updateBlogPost: 'update blog set  heading = ? , content = ?, view_option = ?,  user_id = ? where blog_id = ?'
 }

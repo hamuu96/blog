@@ -19,6 +19,8 @@ router.get('/login',authController.admin_login );
 router.post('/login',urlencodedParser,authController.login_auth );
 
 
+//route and controller to login page of admin
+router.get('/logout',authController.logout );
 
 
 module.exports = router;

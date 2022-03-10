@@ -1,18 +1,17 @@
 const mysql = require('mysql');
-const database = 'M00794993Hamza';
 
 const config = {
-    host: 'localhost',
-    user: 'M00794993Hamza',
-    password: '1234' ,
-    database: database
+    host: process.env.HOST,
+    user: process.env.USERNAME,
+    password: process.env.PASSWORD,
+    database: process.env.DATABASE 
 }
-async function test_conn(database = null) {
+async function test_conn() {
 
     const initial_conn = mysql.createConnection({
-        host: 'localhost',
-        user: 'M00794993Hamza',
-        password: '1234' 
+        host: process.env.HOST,
+        user: process.env.USERNAME,
+        password: process.env.PASSWORD,
        
     });
 
@@ -22,7 +21,7 @@ async function test_conn(database = null) {
             throw err;
         console.log('testing connected to database');
     });
-    const db = `Create database if not exists ${database}`;
+    const db = `Create database if not exists ${process.env.DATABASE}`;
     initial_conn.query(db, (err, result, fields) => {
         if (err)
             throw err;
@@ -31,16 +30,20 @@ async function test_conn(database = null) {
     return true;
 }
 
-const test = test_conn(database);
+const test = test_conn();
 
 
 if (test ){ // error when using config as the configuration
     const connection = mysql.createConnection(
         {
-            host: 'localhost',
-            user: 'M00794993Hamza',
-            password: '1234' ,
-            database: database
+            host: process.env.HOST,
+            user: process.env.USERNAME,
+            password: process.env.PASSWORD,
+            database: process.env.DATABASE ,
+            socketPath: '/Applications/XAMPP/xamppfiles/var/mysql/mysql.sock',
+            // port: '8889'
+
+
         }
 
     )

@@ -76,20 +76,16 @@ function deleteBlog(blog_id, callback){
         return callback(result, err);
     })
 }
-function editBlog(blog_id, heading, content, image, multimedia,view_option, userid, callback){
+function editBlog( heading, content, view_option, userid,blog_id, callback){
 
     //insert blog 
-    conn.query(sql.updateBlogPost, [blog_id, heading, content,view_option, userid], (err, result, fields) => {
+    conn.query(sql.updateBlogPost, [ heading, content,view_option, userid,blog_id], (err, result, fields) => {
         //return results
         return callback(result, err);
     })
 
 }
-// function gBlog(blog_id, callback){
-//     conn.query(sql.deleteBlogPost, [blog_id], (err, result, fields) =>{
-//         return callback(result, err);
-//     })
-// }
+
 module.exports = {
     getAdminCreds,
     insertUsers,

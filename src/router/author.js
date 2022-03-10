@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const authorConroller = require('../controllers/authorContoller')
-
+const userController = require('../controllers/userController')
 
 // author index page
 router.get('/', authorConroller.author); 
@@ -29,4 +29,6 @@ router.get('/edit/:id', authorConroller.edit);
 // get author page 
 router.post('/edit/:id', authorConroller.editBlog); 
 
+// get author page 
+router.get('/logout', authorConroller.logout); 
 module.exports = router;

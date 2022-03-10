@@ -7,7 +7,13 @@
     <%- include('../partials/author.ejs') %>  
 
     <div class="container" style="margin-top: 70px; margin-bottom: 100px;">
-        <h1>Welcome back: <author> hude</author></h1>
+        <h1>Welcome back: <span> <%- username %> </span></h1>
+
+        <% if(msg) { %>
+            <div class="alert alert-warning" role="alert">
+                <%- msg %>
+             </div>
+        <% } %>
 
         <div class="author-options">
             <button type="button" class="btn btn-dark"><a href="author/public">Create Public Blog</a></button>

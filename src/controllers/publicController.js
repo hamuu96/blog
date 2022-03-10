@@ -27,6 +27,7 @@ exports.getBlogs = (req, res) =>{
     // get blog with view option public
     sqlController.getPublicBlog(view_option, (result, err) => {
         if(err) throw err;
+        console.log(result);
         res.render('user/index', {publicBlogs: result});
     })
 }

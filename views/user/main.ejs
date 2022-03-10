@@ -5,15 +5,15 @@
     
 	<%- include('../partials/member.ejs') %>   
 
-	<% var contentLength = Math.round(memberBlogs[0]['content'].length /4); var shortContent = memberBlogs[0]['content'].slice(0,77)  %>
 
+<% try { %>
 <div class="container-fluid" id="header">
 
 	  <!-- hero section -->
 	  <div class="container" id="hero">
 	  	<div class="row justify-content-end">
 	  		<div class="col-lg-6 hero-img-container">
-	  			<a href="./single">
+					<a  href="./single/<%= memberBlogs[0]['blog_id'] %>">
 	  			<div class="hero-img">
 	  				<img src="./img/hero-img.png">
 	  			</div>
@@ -49,8 +49,8 @@
 <div class="container mt-2 mb-2 pt-5 pb-5" id="article-grid">
 	<div class="row justify-content-center">
 
+		<% var contentLength = Math.round(memberBlogs[0]['content'].length /4); var shortContent = memberBlogs[0]['content'].slice(0,77)  %>
 
-<% try { %>
 <%   for(var i = 1; i< memberBlogs.length; i++) {%>
 
 	<div class="col-xl-6 col-lg-12 text-center">
@@ -69,21 +69,21 @@
 	</div>
 <% }; %>
 <% } catch{ %>
-	<div class="alert alert-warning" role="alert">
+	<div class="alert alert-warning" role="alert" style="text-align: center;">
 		 No member blogs available at the moment.
 	  </div>
-
+	</div>
+</div>
 <% } %>
 <!-- More articles button -->
 
-<div class="container text-center pb-3 mb-5">
-		<a href="#" class="btn btn-lg btn-light">More Articles</a>
-</div>
+
 
 
 <!-- Footer section  -->
 
 <%- include('../partials/footer.ejs') %> 
+
 
 
    

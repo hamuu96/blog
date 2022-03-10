@@ -6,10 +6,13 @@ const view_option = 'member'
 
 exports.getMemberBlogs = (req, res) =>{
 
-    // get blog with view option public
-    sqlController.getMemberBlog(view_option, (result, err) => {
-        if(err) throw err;
-        // console.log(result);
-        res.render('user/main', {memberBlogs: result});
-    })
+    if(req.session.memberUsername | req.session.authorUserid){
+        sqlController.getMemberBlog(view_option, (result, err) => {
+            if(err) throw err;
+            // console.log(result);
+            res.render('user/main', {memberBlogs: result});
+        })
+    }else{
+        res.redirect('/login')
+    }
 }

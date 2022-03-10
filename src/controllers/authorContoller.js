@@ -6,26 +6,26 @@ const bcrypt = require('bcrypt')
 const readline = require('readline')
 const multer = require('multer')
 const escape = require('escape-html');
-const { builtinModules } = require('module')
 const sql = require('../database/sql')
-const { nextTick } = require('process')
+const userController = require('./userController')
+
 
 // get data from form and insert into database
-function insertBlogContent (req, res ){
-    const { heading, content, image, multimedia,view_option, userid} = req.body
 
-    // // insert data into database about blog
-    sqlController.insertBlog( heading, content, image, multimedia,view_option, userid, (result, err) => {
+function insertBlogContent (req, res ){
+    const { heading, content, image, multimedia,view_option} = req.body
+    if(image == '' & multimedia == ''){
+        res.send('Please enter an image and multimedia!').end()
+    }else{
+        sqlController.insertBlog( heading, content, image, multimedia,view_option, req.session.authorUserid, (result, err) => {
         if(err) throw err;
+        
         res.redirect('/author') 
     })
-
 }
-
-function deleteBlog( req, res,blog_id){
+        
+}
    
-
-}
 function getBlogData( req, res,blog_id){
     //get all blogs
     sqlController.getSingleBlog(blog_id['id'],(result, err) => {
@@ -35,38 +35,67 @@ function getBlogData( req, res,blog_id){
     })
 }
 function editBlog( req, res,blog_id){
-    const { heading, content, image, multimedia, view_option, userid } = req.body
+    const { heading, content, view_option} = req.body
     //get all blogs
-    sqlController.editBlog(blog_id['id'], heading, content,view_option, userid,(result, err) => {
+    sqlController.editBlog( heading, content,view_option, req.session.authorUserid,blog_id['id'],(result, err) => {
         if(err) throw err;
         //redirect to delete page once button is clicked
-        res.render('author/edit', {option: view_option })
+        res.redirect('/author/view')
+        // res.render('author/edit', {option: view_option })
     
     })
 }
+
 exports.author = (req, res) => {
-    res.render('author/author-index');
+   if(req.session.authorUserid){
+        res.render('author/author-index', {msg: '', username: req.session.authorUsername});
+   }else{
+       res.redirect('/login')
+   }
 }
 
 exports.profile = (req, res) => {
-    res.render('author/author-profile');
+   if(req.session.authorUserid){
+        res.render('author/author-profile');
+    }else{
+        res.redirect('/login')
+    }
 }
 exports.public = (req, res) => {
 
-    res.render('author/create', {option: 'public'});
+   if(req.session.authorUserid){
+    res.render('author/create', {option: 'Public', username: req.session.authorUsername});
+    }else{
+        res.redirect('/login')
+    }
 }
 exports.private = (req, res) => {
-    res.render('author/create', {option: 'priavte'});
+
+   if(req.session.authorUserid){
+    res.render('author/create', {option: 'Private', username: req.session.authorUsername});
+    }else{
+        res.redirect('/login')
+    }
 }
 exports.member = (req, res) => {
-    res.render('author/create', {option: 'member'});
+
+    console.log(req.session.authorUserid);
+   if(req.session.authorUserid){
+    res.render('author/create', {option: 'Member', username: req.session.authorUsername});
+    }else{
+        res.redirect('/login')
+    }
 }
 exports.view = (req, res) => {
+   if(req.session.authorUserid){
       //get all blogs
-      sqlController.getAllBlogs(1,(result, err) => {
+      sqlController.getAllBlogs(req.session.authorUserid,(result, err) => { // change id, id to be selected from user login 
         if(err) throw err;
-        res.render('author/blogview', {blogs: result});
+        res.render('author/blogview', {blogs: result, username: req.session.authorUsername});
     })//change user id
+    }else{
+        res.redirect('/login')
+    }
     
 }
 exports.postBlog =  (req, res) => {
@@ -78,7 +107,9 @@ exports.deleteBlog =  (req, res) => {
     sqlController.deleteBlog(req.params['id'],(result, err) => {
         if(err) throw err;
         //redirect to delete page once button is clicked
-        res.render('author/blogview', {msg: `Blog with id: ${blog_id} has been deleted`}) // redirect to page
+        res.redirect('/author/view')
+
+        // res.render('author/author-index',{msg: 'blog post deleted'}) // redirect to page
     })
 }
 exports.edit =  (req, res) => {
@@ -86,6 +117,9 @@ exports.edit =  (req, res) => {
     getBlogData(req,res, req.params)
 }
 exports.editBlog =  (req, res) => {
-    console.log(req.body);
     editBlog(req,res,req.params)
+}
+exports.logout = (req, res) =>{
+    req.session.destroy()
+    res.redirect('/login')
 }

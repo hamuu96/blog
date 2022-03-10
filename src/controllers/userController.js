@@ -9,6 +9,7 @@ const escape = require('escape-html');
 const app = express();
 app.use(express());
 
+let userid , username;
 
 exports.signup = (req, res, next) => {
 
@@ -18,7 +19,6 @@ exports.signup = (req, res, next) => {
     
     const isoDate = new Date(dob);
     const mySQLDateString = isoDate.toJSON().slice(0, 19).replace('T', ' ');
-    console.log();
 
     //check if user exists
     sqlController.getUser(email, (result, err) =>{
@@ -51,6 +51,7 @@ exports.signup = (req, res, next) => {
 
 exports.login =  async (req, res,next) => {
 
+
     const {email , password } = req.body
     //check if fields are not empty
     if(email == '' && password == ''){
@@ -65,16 +66,28 @@ exports.login =  async (req, res,next) => {
                 const hashcompare = bcrypt.compareSync(password, result[0]['password'])
                     if(hashcompare){
                         if(result[0]['author'] == 'True'){
+                            //set author sessions
+                            req.session.authorLoggedIn = true;
+                            userid = req.session.authorUserid = result[0]['user_id'];
+                            username = req.session.authorUsername = result[0]['firstname'] + result[0]['lastname'];
                             res.status(200);
-                           res.redirect(301, '/author') //redirect to 
+                           res.redirect( '/author') //redirect to 
                             
                            next()
                         }else{
-                            res.redirect('/main') // redirect to logged in user
+                            //set user sessions
+                            req.session.userLoggedIn = true;
+                            userid = req.session.userid = result[0]['user_id'];
+                            username = req.session.memberUsername = result[0]['firstname'] + result[0]['lastname'];
+                            // console.log(req.session);
+                            res.status(200);
+                            res.redirect('/main')
+                            // console.log(req.session);
+                            res.re('user/main', {username: req.session.username})
                         }
                     }
                     else{
-                        res.json({err: 'not success'})
+                        res.json({err: 'credentials provided were not successful'})
 
                     }
             } catch{
@@ -87,6 +100,3 @@ exports.login =  async (req, res,next) => {
   
 }
 
-exports.author = (req, res) =>{
-    res.render('author/author-index');
-};
