@@ -14,19 +14,6 @@ const author = require('./src/router/author');
 var MySQLStore = require('express-mysql-session')(session);
 var mysql = require('mysql');
 
-// using msql session store
-// var options = {
-//   host: process.env.HOST,
-//   port: 3306,
-//   user: process.env.USERNAME,
-//   password: process.env.PASSWORD,
-//   database: process.env.DATABASE
-// };
-
-// var connection = mysql.createConnection(options); // or mysql.createPool(options);
-// var sessionStore = new MySQLStore({}/* session store options */, connection);
-
-
 const app = express();
 
 app.set('trust proxy', 1) // trust first proxy
@@ -61,14 +48,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 var logs = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
 
 // morgan middleware provides log 
-app.use(morgan('common', {stream: logs})) // --> write logs to a file 
+app.use(morgan('combined', {stream: logs})) // --> write logs to a file 
 
-app.use(helmet())
-app.use(helmet.hsts()); // default configuration
-app.use(helmet.hsts({maxAge: 12345, includeSubDomains: false}));
-// app.use(helmet.noSniff());
-app.use(helmet.hidePoweredBy()); //hide powered by
-// app.use(helmet.noCache())
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+    
+  })
+);
+app.use(helmet.xssFilter());
+
 
 
 // Routes 
