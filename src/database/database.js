@@ -40,7 +40,6 @@ if (test ){ // error when using config as the configuration
             user: process.env.USERNAME,
             password: process.env.PASSWORD,
             database: process.env.DATABASE ,
-            socketPath: '/Applications/XAMPP/xamppfiles/var/mysql/mysql.sock',
             // port: '8889'
 
 
