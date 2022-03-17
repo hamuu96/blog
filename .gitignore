@@ -5,3 +5,6 @@ node_modules/
 .env
 access.log
 architecture.txt
+.ssl/
+.steps.txt
+access.log

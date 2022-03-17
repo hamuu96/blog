@@ -1,7 +1,19 @@
 const express = require('express')
 const router = express.Router()
 const authorConroller = require('../controllers/authorContoller')
-const userController = require('../controllers/userController')
+const userController = require('../controllers/authController')
+const multer = require('multer')
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, './static/img')
+    },
+    filename: function (req, file, cb) {
+      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+      cb(null, file.fieldname + '-' + uniqueSuffix)
+    }
+  })
+const upload = multer({storage: storage})
 
 // author index page
 router.get('/', authorConroller.author); 
@@ -11,15 +23,15 @@ router.get('/profile', authorConroller.profile);
 // get author page 
 router.get('/public', authorConroller.public); 
 // get author page 
-router.post('/public', authorConroller.postBlog); 
+router.post('/public',upload.single('image'), authorConroller.postBlog); 
 // get author page 
 router.get('/member', authorConroller.member); 
 // get author page 
-router.post('/member', authorConroller.postBlog); 
+router.post('/member', upload.single('image'),authorConroller.postBlog); 
 // get author page 
 router.get('/private', authorConroller.private); 
 // get author page 
-router.post('/private', authorConroller.postBlog); 
+router.post('/private',upload.single('image'), authorConroller.postBlog); 
 // get author page 
 router.get('/view', authorConroller.view); 
 // get author page 

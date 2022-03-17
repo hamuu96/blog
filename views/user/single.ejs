@@ -15,7 +15,7 @@
 	  		<div class="col-lg-6 hero-img-container">
 	  			<div class="hero-img">
 	  				<!-- hero img -->
-	  				<img src="../img/hero-img-2.jpeg">
+	  				<img src="../img/<%= singleBlogItem[0]['image'] %>">
 	  			</div>
 	  		</div>	  		
 
@@ -29,10 +29,9 @@
 	  		<div class="col-lg-6">
 	  			<div class="hero-meta">
 	  				<div class="author">
-	  					<div class="author-img"><img src="../img/author-img.png"></div>
+						<div class="author-img"><img src="../img/user.png"></div>
 	  					<div class="author-meta">
-	  					<span class="author-name">Celeste Connell</span>
-	  					<span class="author-tag">Travel Blogger</span>
+							<span class="author-name" style="margin-top: 16px;"> <%= [userdata[0]['firstname'], userdata[0]['lastname']].join(' ') %></span> <!-- fetch user name from user id -->	  					</div>	
 	  					</div>	
 	  				</div>
 	  				<span class="date mt-1"><%= singleBlogItem[0]['date'] %></span>
@@ -66,43 +65,7 @@
 </div>
 
 
-<!-- Related Article Grid -->
 
-<!-- <div class="container mt-3 mb-5" id="article-grid">
-	<div class="row">
-
-		<div class="col-xl-6 col-lg-12 text-center">
-			<a href="./single">
-			<div class="article-card">
-			<div class="article-img">
-				<img src="./img/5.jpeg">
-			</div>
-
-				<div class="article-meta text-left">
-					<h2>To theory equation, more have the or to was the</h2>
-					<p>Herself of that similar live good up which is are to for French endeavours, screen.</p>
-				</div>
-			</div>
-			</a>
-		</div>
-	
-		<div class="col-xl-6 col-lg-12 text-center">
-			<a href="./single">
-			<div class="article-card">
-			<div class="article-img">
-				<img src="./img/6.jpeg">
-			</div>
-
-				<div class="article-meta text-left">
-					<h2>Morning, it mouth. Harder of </h2>
-					<p>Explain the in fly tone research volunteers and both only the drew cleaning to each language trial.</p>
-				</div>
-			</div>
-			</a>
-		</div>
-
-	</div>
-</div> -->
 
 <!-- Footer section  -->
 <%- include('../partials/footer.ejs') %> 

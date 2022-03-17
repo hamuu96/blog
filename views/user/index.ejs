@@ -16,7 +16,7 @@
 	  		<div class="col-lg-6 hero-img-container">
 					<a  href="./single/<%= publicBlogs[0]['blog_id'] %>">
 	  			<div class="hero-img">
-	  				<img src="./img/hero-img.png">
+	  				<img src="./img/<%= publicBlogs[0]['image'] %>">
 	  			</div>
 	  			</a>
 	  		</div>	  		
@@ -34,12 +34,12 @@
 	  			<div class="hero-meta">
 	  				<p> <%- shortContent%> </p>
 	  				<div class="author">
-	  					<div class="author-img"><img src="./img/author-img.png"></div>
+	  					<div class="author-img"><img src="./img/user.png"></div>
 	  					<div class="author-meta">
-	  					<span class="author-name" style="margin-top: 16px;">Celeste Connell</span> <!-- fetch user name from user id -->
-	  					</div>	
+							<span class="author-name" style="margin-top: 16px;"> <%= [userdata[0]['firstname'], userdata[0]['lastname']].join(' ') %></span> <!-- fetch user name from user id -->	  					</div>	
 	  				</div>
 	  			</div>
+				  <span class="date mt-1"><%- publicBlogs[0]['date'] %></span>
 	  		</div>
 	  	</div>
 	  </div>
@@ -61,7 +61,7 @@
 		<a href="./single/<%= publicBlogs[i]['blog_id'] %>">
 		<div class="article-card">
 		<div class="article-img">
-			<img src="./img/1.jpeg">
+			<img src="./img/<%= publicBlogs[i]['image'] %>">
 		</div>
 
 			<div class="article-meta text-left">

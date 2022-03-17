@@ -11,11 +11,8 @@
 
         <div class="create-form">
             <h2>Create  blog</h2>
-            <form action="/author/<%- option %>" method="post">
-                <div class="form-group">
-                    <label for="exampleFormControlInput1" >user id</label>
-                    <input type="text" class="form-control" style="text-transform: uppercase;" id="exampleFormControlInput1" placeholder=" user id " name="userid">
-                  </div>
+            <form action="/author/<%- option %>" method="post" enctype="multipart/form-data" >
+               
                 <div class="form-group">
                     <label for="exampleFormControlInput1" >Blog Heading</label>
                     <input type="text" class="form-control" style="text-transform: uppercase;" id="exampleFormControlInput1" placeholder="Blog heading" name="heading">
@@ -34,22 +31,12 @@
                               <div class="d-flex justify-content-center">
                                   <div class="btn btn-mdb-color btn-rounded float-left">
                                   <span>Choose Image</span>
-                                  <input type="file"  name="image">
+                                  <input type="file"  name="image" multiple>
                                   <!-- <input type="file" name="file" name="media"> -->
                                   </div>
                                   
                               </div>
                               </div>
-                              <div class="file-field">
-                                <div class="d-flex justify-content-center">
-                                    <div class="btn btn-mdb-color btn-rounded float-left">
-                                    <span>Additional multimedia</span>
-                                    <input type="file"  name="multimedia">
-                                    <!-- <input type="file" name="file" name="media"> -->
-                                    </div>
-                                    
-                                </div>
-                                </div>
                               </div>
                       </div>
                     </div>

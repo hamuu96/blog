@@ -21,23 +21,38 @@ exports.userloggedin = (req, res) =>{
 
 //fetch blogs from database
 exports.getBlogs = (req, res) =>{
-
     //initialize database tables
     const create_tables = require('../database/tables');
     // get blog with view option public
     sqlController.getPublicBlog(view_option, (result, err) => {
         if(err) throw err;
-        console.log(result);
-        res.render('user/index', {publicBlogs: result});
+        sqlController.selectDataFromID(result[0]['user_id'], (userresult, err) => {
+            if(err) throw err;
+        res.render('user/index', {publicBlogs: result, userdata: userresult});
+        })
+       
     })
 }
 //diplay single blog items
 exports.displaySingleBlog = (req, res) =>{
     // console.log(req.params['id']);
+    // if statement (userid == session.user.id = output)
     sqlController.getSingleBlog(req.params['id'], (result, err) => {
         if(err) throw err;
-        
-        res.render('user/single', {singleBlogItem: result});
+    if(result[0]['view_option'] == 'Public' ){
+        sqlController.selectDataFromID(result[0]['user_id'], (userresult, err) => {
+            if(err) throw err;
+            res.render('user/single', {singleBlogItem: result, userdata: userresult});
+        }) 
+    }else if(result[0]['view_option'] == 'Member' & req.session.authorUserid == result[0]['user_id'] ){
+        sqlController.selectDataFromID(result[0]['user_id'], (userresult, err) => {
+            if(err) throw err;
+            res.render('user/single', {singleBlogItem: result, userdata: userresult});
+        }) 
+    }
+    else{
+        res.json({msg: 'cannot access member blogs'})
+    } 
     })
 };
 

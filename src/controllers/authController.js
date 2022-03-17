@@ -14,14 +14,22 @@ let userid , username;
 exports.signup = (req, res, next) => {
 
 
-    
-    const { firstname, lastname, email, password, address, author, dob } = req.body;
-    
+
+    // const { firstname, lastname, email, password, address, author, dob } = req.body;
+    let firstname = escape(req.body.firstname)
+    let lastname = escape(req.body.lastname)
+    let email  = escape(req.body.email)
+    let address = escape(req.body.address)
+    let password = escape(req.body.password)
+    let author = escape(req.body.author)
+    let dob = escape(req.body.dob)
+
     const isoDate = new Date(dob);
     const mySQLDateString = isoDate.toJSON().slice(0, 19).replace('T', ' ');
 
     //check if user exists
     sqlController.getUser(email, (result, err) =>{
+        if(err){res.send({err: 'error occured. Please retry'})}
         // res.json({msg: result.length})
         if(result.length > 0){
             res.json({err: 'user already exists'})
@@ -69,7 +77,7 @@ exports.login =  async (req, res,next) => {
                             //set author sessions
                             req.session.authorLoggedIn = true;
                             userid = req.session.authorUserid = result[0]['user_id'];
-                            username = req.session.authorUsername = result[0]['firstname'] + result[0]['lastname'];
+                            username = req.session.authorUsername = [result[0]['firstname'] + result[0]['lastname']].join(' ');
                             res.status(200);
                            res.redirect( '/author') //redirect to 
                             
@@ -78,7 +86,7 @@ exports.login =  async (req, res,next) => {
                             //set user sessions
                             req.session.userLoggedIn = true;
                             userid = req.session.userid = result[0]['user_id'];
-                            username = req.session.memberUsername = result[0]['firstname'] + result[0]['lastname'];
+                            username = req.session.memberUsername = [result[0]['firstname'] + result[0]['lastname']].join(' ');
                             // console.log(req.session);
                             res.status(200);
                             res.redirect('/main')

@@ -1,0 +1,21 @@
+
+so far
+ - implemented html to login
+ - implemented html to signup 
+ - get data from form 
+
+what you need to do 
+ - signup -> once you get the data, insert data to database 
+ - login  
+    - get data from databse based on username provided
+    - check password if they match with password provided
+    - login the user
+ - blog 
+    - user to be able to create blogs
+        - user needs to upload files 
+        - user specify if the blog is private, public or for members
+    - user can delete a blog
+    - user can update the blog 
+- admin
+    - be able to view requests from users 
+    - logout

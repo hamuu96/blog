@@ -29,10 +29,10 @@ function insertUsers(firstname, lastname, email, password, address,  author, dob
 }
 
 
-function insertBlog(heading, content, image, multimedia,view_option, userid, callback){
+function insertBlog(heading, content, image, view_option, userid, callback){
 
     //insert blog 
-    conn.query(sql.insertBlog, [heading, content, image, multimedia,view_option, userid], (err, result, fields) => {
+    conn.query(sql.insertBlog, [heading, content, image, view_option, userid], (err, result, fields) => {
         //return results
         return callback(result, err);
     })
@@ -85,7 +85,15 @@ function editBlog( heading, content, view_option, userid,blog_id, callback){
     })
 
 }
+function selectDataFromID (blogUser_id, callback){
 
+    //insert blog 
+    conn.query(sql.selectDataFromID, [blogUser_id], (err, result, fields) => {
+        //return results
+        return callback(result, err);
+    })
+
+}
 module.exports = {
     getAdminCreds,
     insertUsers,
@@ -96,6 +104,7 @@ module.exports = {
     getMemberBlog,
     getAllBlogs,
     deleteBlog,
-    editBlog
+    editBlog,
+    selectDataFromID
  
  }

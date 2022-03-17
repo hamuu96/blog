@@ -8,14 +8,13 @@
 
 <% try { %>
 <div class="container-fluid" id="header">
-
 	  <!-- hero section -->
 	  <div class="container" id="hero">
 	  	<div class="row justify-content-end">
 	  		<div class="col-lg-6 hero-img-container">
 					<a  href="./single/<%= memberBlogs[0]['blog_id'] %>">
 	  			<div class="hero-img">
-	  				<img src="./img/hero-img.png">
+	  				<img src="./img/<%= memberBlogs[0]['image'] %>">
 	  			</div>
 	  			</a>
 	  		</div>	  		
@@ -35,9 +34,11 @@
 	  				<div class="author">
 	  					<div class="author-img"><img src="./img/author-img.png"></div>
 	  					<div class="author-meta">
-	  					<span class="author-name" style="margin-top: 16px;">Celeste Connell</span> <!-- fetch user name from user id -->
+	  					<span class="author-name" style="margin-top: 16px;"> <%= [userdata[0]['firstname'], userdata[0]['lastname']].join(' ') %></span> <!-- fetch user name from user id -->
+	  					
 	  					</div>	
 	  				</div>
+					  <span class="author-name" style="margin-top: 16px;"> <%= memberBlogs[0]['date'] %></span> <!-- fetch user name from user id -->
 	  			</div>
 	  		</div>
 	  	</div>

@@ -1,6 +1,6 @@
 const dotenv = require('dotenv').config()
 const express = require('express');
-const http = require('http')
+const http = require('https')
 const path = require('path');
 const fs = require('fs');
 const session = require('express-session');
@@ -15,6 +15,15 @@ var MySQLStore = require('express-mysql-session')(session);
 var mysql = require('mysql');
 
 const app = express();
+let port = process.env.PORT || 8082
+
+const httpOptions = {
+  key: fs.readFileSync('./ssl/key.pem'),
+  cert: fs.readFileSync('./ssl/cert.pem'),
+  passphrase: 'password'
+}
+
+http.createServer(httpOptions, app).listen(port);
 
 app.set('trust proxy', 1) // trust first proxy
 app.use(session({
@@ -24,12 +33,6 @@ app.use(session({
   cookie: { secure: false, maxAge: (30 * 24 * 60 * 60 * 1000 )}
 }))
 
-
-
-// setting up port on app 
-let port = process.env.PORT || 8082
-
-app.listen(port, () => {console.log(`server has started on port ${process.env.PORT}`);});
 
 // serving of static files middleware
 app.use(express.static('static'));
@@ -53,12 +56,9 @@ app.use(morgan('combined', {stream: logs})) // --> write logs to a file
 app.use(
   helmet({
     contentSecurityPolicy: false,
-    
   })
 );
 app.use(helmet.xssFilter());
-
-
 
 // Routes 
 app.use('/', basic);

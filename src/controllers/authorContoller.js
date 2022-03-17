@@ -7,21 +7,34 @@ const readline = require('readline')
 const multer = require('multer')
 const escape = require('escape-html');
 const sql = require('../database/sql')
-const userController = require('./userController')
-
 
 // get data from form and insert into database
 
 function insertBlogContent (req, res ){
-    const { heading, content, image, multimedia,view_option} = req.body
-    if(image == '' & multimedia == ''){
-        res.send('Please enter an image and multimedia!').end()
+    const content = escape(req.body.content);
+    const heading = escape(req.body.heading);
+    const image = req.body.image;
+    const  view_option = req.body.view_option;
+    console.log(req.file);
+    console.log(req.body);
+    
+    const sanitized_content = content.replace('&lt;', '')
+    //check if fields are not empty
+    if(image == ''){
+        res.send('Please upload an image to the blog').end()
     }else{
-        sqlController.insertBlog( heading, content, image, multimedia,view_option, req.session.authorUserid, (result, err) => {
-        if(err) throw err;
-        
-        res.redirect('/author') 
-    })
+        //ensure image is being uploaded using specified input
+        if (req.file.fieldname == "image" ) {
+            //check upload file mimetype
+            if (req.file.mimetype == 'image/png' ||req.file.mimetype == 'image/jpg' ||req.file.mimetype == 'image/jpeg'||req.fiel.mimetype =='image/gif') { // check file type to be png, jpeg, or jpg
+                //insert data to database
+                sqlController.insertBlog( heading, sanitized_content, req.file.filename,view_option, req.session.authorUserid, (result, err) => {
+                        if(err) throw err;
+                        res.redirect('/author') 
+                 })
+            } 
+        }
+    //    
 }
         
 }
@@ -31,18 +44,20 @@ function getBlogData( req, res,blog_id){
     sqlController.getSingleBlog(blog_id['id'],(result, err) => {
         if(err) throw err;
         //redirect to delete page once button is clicked
-        res.render('author/edit', {option: result} )
+        res.render('author/edit', {option: result, username: req.session.authorUsername} )
     })
 }
 function editBlog( req, res,blog_id){
-    const { heading, content, view_option} = req.body
+
+    const content = escape(req.body.content);
+    const heading = escape(req.body.heading);
+    const  view_option = req.body.view_option;
     //get all blogs
     sqlController.editBlog( heading, content,view_option, req.session.authorUserid,blog_id['id'],(result, err) => {
         if(err) throw err;
         //redirect to delete page once button is clicked
         res.redirect('/author/view')
         // res.render('author/edit', {option: view_option })
-    
     })
 }
 
