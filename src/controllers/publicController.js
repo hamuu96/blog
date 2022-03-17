@@ -26,10 +26,16 @@ exports.getBlogs = (req, res) =>{
     // get blog with view option public
     sqlController.getPublicBlog(view_option, (result, err) => {
         if(err) throw err;
-        sqlController.selectDataFromID(result[0]['user_id'], (userresult, err) => {
-            if(err) throw err;
-        res.render('user/index', {publicBlogs: result, userdata: userresult});
-        })
+        if(result.length !=0 ){
+            sqlController.selectDataFromID(result[0]['user_id'], (userresult, err) => {
+                if(err) throw err;
+                res.render('user/index', {publicBlogs: result, userdata: 0});
+            })
+        }else{
+        res.render('user/index', {publicBlogs: result });
+        }
+        console.log(result.length);
+        
        
     })
 }
