@@ -15,8 +15,7 @@ function insertBlogContent (req, res ){
     const heading = escape(req.body.heading);
     const image = req.body.image;
     const  view_option = req.body.view_option;
-    console.log(req.file);
-    console.log(req.body);
+
     
     const sanitized_content = content.replace('&lt;', '')
     //check if fields are not empty
@@ -55,9 +54,7 @@ function editBlog( req, res,blog_id){
     //get all blogs
     sqlController.editBlog( heading, content,view_option, req.session.authorUserid,blog_id['id'],(result, err) => {
         if(err) throw err;
-        //redirect to delete page once button is clicked
         res.redirect('/author/view')
-        // res.render('author/edit', {option: view_option })
     })
 }
 
